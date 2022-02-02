@@ -1,1 +1,5 @@
 What are the questions that we could answer with the "cities" data set?
+
+We would want to find the relationship between the population of a city and the volume of crimes per capita.
+We would want to know if crime rate has gone up or down over the years.
+We would want to find out what crimes have the highest correlation with each other.
