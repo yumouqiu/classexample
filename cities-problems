@@ -1,3 +1,10 @@
+What are the questions that we could answer with the "cities" data set?
+
+Which city has the highest crime rate?
+Which city has the highest crime rate per capita?
+What is the average likelihood that a violent crime is an aggravted assault?
+How does property crime correlate to burglary
+
 From Mila:
 1. Which city has the most violent crimes?
 2. Is there a correlation between violent crimes and population?
@@ -9,3 +16,4 @@ From Noah:
 6. Which city has the highest crime rate per capita?
 7. What is the average likelihood that a violent crime is an aggravted assault?
 8. How does property crime correlate to burglary
+
