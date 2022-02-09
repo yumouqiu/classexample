@@ -1,0 +1,111 @@
+---
+title: 'Homework 2'
+author: "Vaidehee Bahirat"
+date: "2/2/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### Due: 2/9/2022 before 11:59pm. Submit in Canvas (file upload).
+
+1. Finish the in-class practice in Slides 3-12 in "Lecture 2-2-Practice for git", link: https://yumouqiu.github.io/DS202-Spring2022/Practice/practice01.html  
+    a. Download the RMarkdown file with these homework instructions to use as a template for your work. Make sure to replace "Your Name" with your name.  
+    b. In the RMarkdown file, write down table of team members, and their github repository links;   
+1)Name- Michael Moore , Polina Semenova  
+
+2)Git hub repo link- DS202Mamoore , practice1-psemenova  
+
+3)Successful pull requests- 1,1
+
+4)The github repository requested a change- vbahirat/DS202Mamoore, vbahirat/practice1-psemenova
+
+5)Pull requests you accepted- 1,1 <br>
+
+6)Name of repository from which you accepted- DS202Mamoore, practice1-psemenova
+
+
+
+
+    c. Write down a list with at least 3 tips of how to make working with git/github easier 
+   **1. Creating repositories makes it very easy working and classifying information on github.**
+    **2. Creating teams and collaborating using repositories by forking, pulling, and merging is very helpful. This helps work in teams and also helps solve errors.**
+    **3. Following people on github constantly makes you aware of the different ideas and new projects.**
+    
+
+2. Generate the graph of LifExp vs. gdpPercap for US, Canada (fixed data) and Australia by RMarkdown based on the data set "gapminder-5060", like what we did in the class.  
+Please use Github to collaborate on this problem. For example, one member can create the plot of US in his/her repository. The other member will fork this repository, add the result for the second country, and make a pull request for merging into the main repository. Each member should at least analyze one country and make at least one pull request. **Please submit the RMarkdown file, the output file, and the screen shot of the successful pull request and the merge.**
+
+```{r}
+life5060 <- read.csv("https://raw.githubusercontent.com/ds202-at-isu/materials/master/01_collaborative-environment/data/gapminder-5060.csv")
+head(life5060)
+dim(life5060)
+```
+```{r}
+canada1 <- life5060[life5060$country == "Canada", ]
+head(canada1)
+dim(canada1)
+```
+```{r}
+library(dplyr)
+canada1 %>% filter(year == 1957)
+canada_fixed <- canada1 %>% mutate(
+  lifeExp = replace(lifeExp, year==1957, 69.96)  
+)
+canada_fixed
+```
+```{r}
+library(ggplot2)
+canada_fixed %>% ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  ggtitle("Canada")+
+  geom_line()
+```
+```{r}
+A1 <- life5060[life5060$country == "Australia", ]
+head(A1)
+dim(A1)
+```
+```{r}
+A1 %>% ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  ggtitle("Australia")+
+  geom_line()
+```
+```{r}
+USA1 <- life5060[life5060$country == "United States", ]
+head(USA1)
+dim(USA1)
+```
+```{r}
+USA1 %>% ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  ggtitle("United States")+
+  geom_line()
+
+```
+
+3. Write a paragraph (~200 words) describing an example of what you consider data science. Write your paragraph in R Markdown. Include at least 
+    a. one link to a chart or an image and 
+    b. at least one itemized or enumerated list.
+    
+
+Data science is the study of data for various purposes and making meaningful interpretations from it. 
+As an Industrial engineer data science would closely connect to me with the inventory situations. Here is the data collection process one by one: <br>
+**1)	Collecting data based on the different parts present in different locations in the warehouse** <br>
+**2)	Tracking their path to the machines **<br> 
+**3)	Information about their suppliers**<br>
+**4)	Name of the part<br>**
+**5)	Part Number**<br>
+Analyzing this data to predict the future parts requirement based on the daily consumption by different machines can be a part of the different data science statistical tools. Prediction models can help predict the future part requirements as parts need to be ordered beforehand in an industry to prevent downtime and industry shutdowns. This data collection and analysis together form a great example of data science. This example closely relates to me as I have used excel to collect the warehouse data and used it further to make some analysis based on the future requirements.  
+Here is an example of the data sheet:
+Will attach in canvas
+    
+ 
+
+
+    
+
+Note: your submission is supposed to be fully reproducible, i.e. the TA and I will 'knit' your submission in RStudio. Including the link to the image is the tricky part here. Make sure that you don't use any file structure that depends on your computing environment.
+
+
+For the submission: submit your solution in an **R Markdown file** and (just for insurance) submit the corresponding html (or Word) file with it.
