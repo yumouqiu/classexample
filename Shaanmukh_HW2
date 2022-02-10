@@ -1,0 +1,100 @@
+---
+title: 'Homework 2'
+author: "Shaanmukh Sevellaa"
+date: "2/2/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### Due: 2/9/2022 before 11:59pm. Submit in Canvas (file upload).
+
+1. Finish the in-class practice in Slides 3-12 in "Lecture 2-2-Practice for git", link: https://yumouqiu.github.io/DS202-Spring2022/Practice/practice01.html  
+    a. Download the RMarkdown file with these homework instructions to use as a template for your work. Make sure to replace "Your Name" with your name.  
+    
+    b. In the RMarkdown file, write down table of team members, and their github repository links;the number of successful pull requests you made, and the github repository to which you requested a change;the number of pull requests you accepted, and the github repository from which you accepted.  
+
+  Team members: Vaidehee Bahirat Github: https://github.com/vbahirat
+  My pull requests: 1 Repo: practice1-vai
+  Other's pull requests: 1 Repo: practice1_shaanmukh
+
+    c. Write down a list with at least 3 tips of how to make working with git/github easier 
+    
+  1. Practice
+  2. Collaborate with friends
+  3. Watch youtube videos and read books
+
+2. Generate the graph of LifExp vs. gdpPercap for US, Canada (fixed data) and Australia by RMarkdown based on the data set "gapminder-5060", like what we did in the class.  
+Please use Github to collaborate on this problem. For example, one member can create the plot of US in his/her repository. The other member will fork this repository, add the result for the second country, and make a pull request for merging into the main repository. Each member should at least analyze one country and make at least one pull request. **Please submit the RMarkdown file, the output file, and the screen shot of the successful pull request and the merge.**
+```{r}
+life5060 <- read.csv("https://raw.githubusercontent.com/ds202-at-isu/materials/master/01_collaborative-environment/data/gapminder-5060.csv")
+head(life5060)
+dim(life5060)
+```
+
+```{r load-packages, include=FALSE}
+library(dplyr)
+library(magrittr)
+library(knitr)
+```
+
+
+```{r}
+canada <- life5060 %>% filter(country == "Canada")
+head(canada)
+dim(canada)
+
+library(ggplot2)
+canada %>% 
+  ggplot(aes(x = year, y = lifeExp)) +
+  geom_line()
+
+canada %>% filter(year == 1957)
+canada_fixed <- canada %>% mutate(
+  lifeExp = replace(lifeExp, year==1957, 69.96))
+
+canada_fixed %>% ggplot(aes(x = year, y = lifeExp)) +
+  geom_line()
+
+plot(x = canada_fixed$gdpPercap, y = canada_fixed$lifeExp, 
+     type = 'l', xlab = "gdpPercap", ylab = "lifeExp")
+```
+
+```{r}
+us <- life5060 %>% filter(country == "United States")
+head(us)
+dim(us)
+
+plot(x = us$gdpPercap, y = us$lifeExp, 
+     type = 'l', xlab = "gdpPercap", ylab = "lifeExp")
+```
+
+```{r}
+australia <- life5060 %>% filter(country == "Australia")
+head(australia)
+dim(australia)
+
+plot(x = australia$gdpPercap, y = australia$lifeExp, 
+     type = 'l', xlab = "gdpPercap", ylab = "lifeExp")
+```
+
+
+3. Write a paragraph (~200 words) describing an example of what you consider data science. Write your paragraph in R Markdown. Include at least 
+    a. one link to a chart or an image and 
+    b. at least one itemized or enumerated list.
+    
+    Data science, for me, is the filtering of data using programming languages and other tools to accommodate our needs/requirements and making predictions out of those results. Some example projects include:
+    1. Weather prediction
+    2. Fake news detection
+    3. Stock market prediction
+    4. Product price suggestion
+    5. Gender detection using the OpenCV library
+    The way I used data science was for a personal project. I was looking to buy a GPU online, but the prices were too high, or there was no stock. So I made a web scraping tool that tracks the prices for me on Amazon and sends me an email alert when there is a price drop or when they come back in stock. On the other hand, companies could use data science to predict the demand for a particular product in the future. They take data from the previous years and model using different tools. 
+    
+    
+Note: your submission is supposed to be fully reproducible, i.e. the TA and I will 'knit' your submission in RStudio. Including the link to the image is the tricky part here. Make sure that you don't use any file structure that depends on your computing environment.
+
+
+For the submission: submit your solution in an **R Markdown file** and (just for insurance) submit the corresponding html (or Word) file with it. 
